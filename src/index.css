@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+.app {
+  padding-left: 50px;
+  padding-right: 50px;
+}
