@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 import styles from './CountryCard.module.css'
+import { getCountryByName } from '../../api/getCountryByName'
 
 export type CountryCardProps = {
   imgSrc: string,
@@ -10,8 +12,9 @@ export type CountryCardProps = {
 
 
 export const CountryCard = ({ imgSrc, name, population, region, capital }: CountryCardProps) => {
+
   return (
-    <div className={styles.countryCard}>
+    <div className={styles.countryCard} onClick={() => getCountryByName(name)}>
       <img src={imgSrc} alt={name} />
       <div className={styles.countryCardInfo}>
         <div className={styles.countryCardName}>{name}</div>
