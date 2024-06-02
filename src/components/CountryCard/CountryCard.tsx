@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+
 import styles from './CountryCard.module.css'
 import { getCountryByName } from '../../api/getCountryByName'
 

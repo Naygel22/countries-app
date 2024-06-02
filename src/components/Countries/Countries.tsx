@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { SelectInputFilter } from "../SelectInputFilter/SelectInputFilter";
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 
 export const Countries = () => {
   const { data, isLoading, error } = useQuery({
@@ -14,6 +15,27 @@ export const Countries = () => {
   });
 
   const [filteredCountries, setFilteredCountries] = useState([]);
+
+  const onSearch = (searchItem) => {
+    const filtered = data.filter(country =>
+      country.name.toLowerCase().includes(searchItem.toLowerCase())
+    );
+    setFilteredCountries(filtered);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      region: ''
+    },
+    onSubmit: (values) => {
+      if (values.region) {
+        const filtered = data.filter(country => country.region === values.region);
+        setFilteredCountries(filtered);
+      } else {
+        setFilteredCountries(data);
+      }
+    }
+  });
 
   useEffect(() => {
     if (data) {
@@ -28,41 +50,38 @@ export const Countries = () => {
   if (error) {
     return <p>Error</p>;
   }
+
   if (!data) {
     return <p>No data</p>;
   }
 
-  const onSearch = (searchItem: string) => {
-    const filtered = data.filter(country =>
-      country.name.toLowerCase().includes(searchItem.toLowerCase())
-    );
-    setFilteredCountries(filtered);
-    console.log(data.find(country => country.name.common === searchItem))
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      region: ''
-    },
-    onSubmit: (values) => console.log(values)
-  })
-
-
+  const regions = data.map(country => country.region);
+  const uniqueRegions = regions.filter((region, index) => regions.indexOf(region) === index).map(region => ({
+    value: region,
+    label: region
+  }));
 
   return (
     <>
-      <SearchForm onSearch={onSearch} />
-      <SelectInputFilter formik={formik} accessor="region" label="Choose a region" options={data} />
+      <div className={styles.searchAndFilterBars}>
+        <SearchForm onSearch={onSearch} />
+        <form onSubmit={formik.handleSubmit}>
+          <SelectInputFilter formik={formik} accessor="region" label="Choose a region" options={uniqueRegions} />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
       <div className={styles.countries}>
         {filteredCountries.map((country) => (
-          <div key={country.id}>
-            <CountryCard
-              imgSrc={country.flag}
-              name={country.name}
-              population={country.population}
-              region={country.region}
-              capital={country.capital}
-            />
+          <div key={country.name}>
+            <Link to={`/${country.name}`}>
+              <CountryCard
+                imgSrc={country.flag}
+                name={country.name}
+                population={country.population}
+                region={country.region}
+                capital={country.capital}
+              />
+            </Link>
           </div>
         ))}
       </div>

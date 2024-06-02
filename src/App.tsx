@@ -1,22 +1,20 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Countries } from "./components/Countries/Countries";
 import { Navbar } from "./components/Navbar/Navbar";
 import { CountryByName } from "./components/CountryByName/CountryByName";
 
-
 function App() {
   return (
-    <div className="app">
+    <BrowserRouter>
       <Navbar />
-      <Countries />
-      <BrowserRouter>
+      <div className="app">
         <Routes>
-          <Route path="/" element={<div>Home</div>} />
-          <Route path="/country/:name" element={<CountryByName />} />
+          <Route path="/" element={<Countries />} />
+          <Route path="/:name" element={<CountryByName />} />
         </Routes>
-      </BrowserRouter>
-    </div>
-  )
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

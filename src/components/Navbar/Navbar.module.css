@@ -1,1 +1,23 @@
-.navbar {}
+.navbar {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.homeSection {
+  display: flex;
+  align-items: center;
+}
+
+.homeIcon {
+  cursor: pointer;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 21px;
+  margin-left: 10px;
+}

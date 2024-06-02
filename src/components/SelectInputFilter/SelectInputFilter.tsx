@@ -15,6 +15,10 @@ export const SelectInputFilter = <FormValues,>({ formik, accessor, label, option
   return (
     <FormControl fullWidth>
       <Select
+        sx={{
+          width: "200px",
+          height: "50px"
+        }}
         labelId={label}
         id={accessor}
         value={formik.values[accessor]}
@@ -26,6 +30,7 @@ export const SelectInputFilter = <FormValues,>({ formik, accessor, label, option
         {options.map((option, id) => (
           <MenuItem key={id} value={option.value}>{option.label}</MenuItem>
         ))}
+
 
       </Select>
     </FormControl>

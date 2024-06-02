@@ -5,3 +5,8 @@
   gap: 90px;
   margin-top: 50px;
 }
+
+.searchAndFilterBars {
+  display: flex;
+  justify-content: space-between;
+}

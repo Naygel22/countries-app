@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./SearchForm.module.css"
 
 type SearchFormProps = {
   onSearch: (searchItem: string) => void
@@ -15,6 +16,7 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
   return (
     <form>
       <input
+        className={styles.searchForm}
         type="text"
         value={searchTerm}
         onChange={handleSearch}
