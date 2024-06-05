@@ -5,37 +5,39 @@ import styles from "./Countries.module.css";
 import { useState, useEffect } from "react";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { SelectInputFilter } from "../SelectInputFilter/SelectInputFilter";
-import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import { language } from "../CountryByName/types";
+
+export type CountryData = {
+  name: string,
+  flag: string,
+  population: string,
+  region: string,
+  capital: string,
+  subregion: string,
+  currencies: Array<{ name: string }>,
+  nativeName: string,
+  topLevelDomain: string,
+  languages: Array<language>
+}
 
 export const Countries = () => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<CountryData[]>({
     queryKey: ["countries"],
     queryFn: getAllCountries
   });
 
-  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState<CountryData[]>([]);
 
-  const onSearch = (searchItem) => {
-    const filtered = data.filter(country =>
+
+  const onSearch = (searchItem: string) => {
+    const filtered = data?.filter(country =>
       country.name.toLowerCase().includes(searchItem.toLowerCase())
     );
-    setFilteredCountries(filtered);
+    setFilteredCountries(filtered || []);
   };
 
-  const formik = useFormik({
-    initialValues: {
-      region: ''
-    },
-    onSubmit: (values) => {
-      if (values.region) {
-        const filtered = data.filter(country => country.region === values.region);
-        setFilteredCountries(filtered);
-      } else {
-        setFilteredCountries(data);
-      }
-    }
-  });
+
 
   useEffect(() => {
     if (data) {
@@ -65,10 +67,14 @@ export const Countries = () => {
     <>
       <div className={styles.searchAndFilterBars}>
         <SearchForm onSearch={onSearch} />
-        <form onSubmit={formik.handleSubmit}>
-          <SelectInputFilter formik={formik} accessor="region" label="Choose a region" options={uniqueRegions} />
-          <button type="submit">Submit</button>
-        </form>
+        <SelectInputFilter label="Change region" options={uniqueRegions} onChange={(region) => {
+          if (region) {
+            const filtered = data.filter(country => country.region === region);
+            setFilteredCountries(filtered);
+          } else {
+            setFilteredCountries(data);
+          }
+        }} />
       </div>
       <div className={styles.countries}>
         {filteredCountries.map((country) => (

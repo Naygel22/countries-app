@@ -1,30 +1,28 @@
-import { FormControl, MenuItem, Select } from "@mui/material";
-import { FormikProps } from 'formik';
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 type Option = {
   value: string;
   label: string;
 }
 
-export const SelectInputFilter = <FormValues,>({ formik, accessor, label, options }: {
-  formik: FormikProps<FormValues>,
-  accessor: keyof FormValues & string
+export const SelectInputFilter = ({ onChange, label, options }: {
   label: string
-  options: Option[]
+  options: Option[],
+  onChange: (value: string) => void
 }) => {
   return (
     <FormControl fullWidth>
+      <InputLabel id="selectLabel">{label}</InputLabel>
       <Select
         sx={{
           width: "200px",
           height: "50px"
         }}
-        labelId={label}
-        id={accessor}
-        value={formik.values[accessor]}
+        defaultValue={""}
+        labelId={'selectLabel'}
         label={label}
         onChange={(e) => {
-          formik.setFieldValue(accessor, e.target.value)
+          onChange(e.target.value)
         }}
       >
         {options.map((option, id) => (

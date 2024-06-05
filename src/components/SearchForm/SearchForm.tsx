@@ -8,9 +8,9 @@ type SearchFormProps = {
 export const SearchForm = ({ onSearch }: SearchFormProps) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    onSearch(e.target.value);
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+    onSearch(value);
   };
 
   return (
@@ -19,7 +19,7 @@ export const SearchForm = ({ onSearch }: SearchFormProps) => {
         className={styles.searchForm}
         type="text"
         value={searchTerm}
-        onChange={handleSearch}
+        onChange={(e) => handleSearch(e.target.value)}
         placeholder="Search for a country..."
       />
     </form>

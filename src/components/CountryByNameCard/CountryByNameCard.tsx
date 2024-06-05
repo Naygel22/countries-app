@@ -2,8 +2,10 @@ import styles from './CountryByNameCard.module.css';
 import { language } from '../CountryByName/types';
 import { useNavigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
+import { CountryData } from '../Countries/Countries';
 
-export const CountryByNameCard = ({ data }) => {
+
+export const CountryByNameCard = ({ data }: { data: CountryData }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -34,3 +36,4 @@ export const CountryByNameCard = ({ data }) => {
     </>
   );
 };
+

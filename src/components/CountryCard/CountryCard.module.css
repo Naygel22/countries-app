@@ -18,7 +18,10 @@
 
 .countryCardInfo {
   padding: 30px;
+  text-decoration: none;
+  color: inherit;
 }
+
 
 .countryCardName {
   margin-bottom: 20px;
