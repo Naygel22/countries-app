@@ -18,7 +18,9 @@ export type CountryData = {
   currencies: Array<{ name: string }>,
   nativeName: string,
   topLevelDomain: string,
-  languages: Array<language>
+  languages: Array<language>,
+  borders: Array<string>,
+  alpha3Code: string
 }
 
 export const Countries = () => {

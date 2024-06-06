@@ -25,6 +25,6 @@ export const CountryByName = () => {
   }
 
   return (
-    <CountryByNameCard data={data} />
+    <CountryByNameCard oneCountryData={data} />
   );
 }
