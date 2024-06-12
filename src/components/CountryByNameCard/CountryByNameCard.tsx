@@ -1,6 +1,6 @@
 import styles from './CountryByNameCard.module.css';
 import { Language } from '../CountryByName/types';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import { CountryData } from '../Countries/Countries';
 import { getAllCountries } from '../../api/getAllCountries';
@@ -57,7 +57,7 @@ export const CountryByNameCard = ({ oneCountryData }: { oneCountryData: CountryD
           <div>
             <b>Border Countries:</b>
             {borderCountries.length > 0
-              ? borderCountries.map(borderCountry => <button key={borderCountry.alpha3Code} className={styles.borderButton} onClick={() => navigate(`/${borderCountry.name}`)}>{borderCountry.name}</button>)
+              ? borderCountries.map(borderCountry => <Link to={`/${borderCountry.name}`} key={borderCountry.alpha3Code} className={styles.borderButton} >{borderCountry.name}</Link>)
               : ' None'}
           </div>
         </div>
