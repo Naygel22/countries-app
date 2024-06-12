@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { SelectInputFilter } from "../SelectInputFilter/SelectInputFilter";
 import { Link } from "react-router-dom";
-import { language } from "../CountryByName/types";
+import { Language } from "../CountryByName/types";
 
 export type CountryData = {
   name: string,
@@ -18,13 +18,13 @@ export type CountryData = {
   currencies: Array<{ name: string }>,
   nativeName: string,
   topLevelDomain: string,
-  languages: Array<language>,
+  languages: Array<Language>,
   borders: Array<string>,
   alpha3Code: string
 }
 
 export const Countries = () => {
-  const { data, isLoading, error } = useQuery<CountryData[]>({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["countries"],
     queryFn: getAllCountries
   });

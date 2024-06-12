@@ -16,6 +16,13 @@
 .homeIcon {
   cursor: pointer;
   color: inherit;
+
+  svg {
+    path {
+      fill: black
+    }
+  }
+
 }
 
 .title {

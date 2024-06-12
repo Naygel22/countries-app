@@ -1,5 +1,5 @@
 import styles from './CountryByNameCard.module.css';
-import { language } from '../CountryByName/types';
+import { Language } from '../CountryByName/types';
 import { useNavigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import { CountryData } from '../Countries/Countries';
@@ -15,11 +15,8 @@ export const CountryByNameCard = ({ oneCountryData }: { oneCountryData: CountryD
   });
 
   const currentBorders = oneCountryData.borders || [];
-  console.log(currentBorders)
 
   const borderCountries = data?.filter(country => currentBorders.includes(country.alpha3Code)) || [];
-  console.log(borderCountries)
-
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -54,7 +51,7 @@ export const CountryByNameCard = ({ oneCountryData }: { oneCountryData: CountryD
             <div className={styles.secondColumn}>
               <div><b>Top Level Domain:</b> {oneCountryData.topLevelDomain}</div>
               <div><b>Currencies:</b> {oneCountryData.currencies[0].name}</div>
-              <div><b>Languages:</b> {oneCountryData.languages.map((language: language) => language.name).join(', ')}</div>
+              <div><b>Languages:</b> {oneCountryData.languages.map((language: Language) => language.name).join(', ')}</div>
             </div>
           </div>
           <div>

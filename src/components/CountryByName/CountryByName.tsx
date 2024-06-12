@@ -7,10 +7,11 @@ import { CountryData } from "../Countries/Countries";
 
 export const CountryByName = () => {
   const params = useParams<{ name: string }>();
-  const { data, isLoading, error } = useQuery<CountryData[]>({
+  const { data, isLoading, error } = useQuery<CountryData | undefined>({
     queryKey: ["country", params.name],
     queryFn: () => getCountryByName(params.name)
   });
+
 
   if (isLoading) {
     return <p>Loading...</p>;
